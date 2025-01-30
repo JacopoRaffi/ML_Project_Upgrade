@@ -1,0 +1,4 @@
+#ifndef LOSS_FUNCTION_HPP
+#define LOSS_FUNCTION_HPP
+
+#endif // LOSS_FUNCTION_HPP
