@@ -36,6 +36,36 @@ public:
 
 
 /**
+ * @brief Linear activation function.
+ * 
+ * The Linear activation function is defined as f(x) = x.
+ */
+class Linear : public ActivationFunction {
+public:
+
+    /**
+     * @brief Apply the Linear activation function to a vector.
+     * 
+     * This method applies the Linear activation function element-wise to a vector.
+     * 
+     * @param x Input vector on which the Linear activation function will be applied.
+     * @return Eigen::VectorXd The vector after applying the Linear activation function element-wise.
+     */
+    Eigen::VectorXd activate(Eigen::VectorXd x) override;
+
+    /**
+     * @brief Compute the derivative of the Linear activation function.
+     * 
+     * This method computes the derivative of the Linear activation function element-wise.
+     * 
+     * @param x Input vector for which the derivative is computed.
+     * @return Eigen::VectorXd The derivative of the Linear activation function applied element-wise.
+     */
+    Eigen::VectorXd derivative(Eigen::VectorXd x) override;
+};
+
+
+/**
  * @brief Rectified Linear Unit (ReLU) activation function.
  * 
  * The ReLU activation function is defined as f(x) = max(0, x).
