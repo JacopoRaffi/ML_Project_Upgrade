@@ -1,7 +1,7 @@
 #include "activation_function.hpp"
 
 // ---------------------------------------- Linear ----------------------------------------
-Eigen::VectorXd Linear::derivative(const Eigen::VectorXd& x){
+Eigen::VectorXd Linear::activate(const Eigen::VectorXd& x){
     return x;
 };
 
