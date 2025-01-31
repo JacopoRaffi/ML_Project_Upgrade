@@ -32,6 +32,8 @@ public:
      * @return Eigen::MatrixXd The derivative of the activation function applied element-wise.
      */
     virtual Eigen::MatrixXd derivative(const Eigen::MatrixXd& x) = 0;
+
+    virtual ~ActivationFunction() = default;
 };
 
 
