@@ -17,10 +17,10 @@ public:
      * 
      * This method must be implemented by any derived class to apply a specific activation function.
      * 
-     * @param x Input vector on which the activation function will be applied.
-     * @return Eigen::VectorXd The vector after applying the activation function element-wise.
+     * @param x Input matrix (batch) on which the activation function will be applied.
+     * @return Eigen::MatrixXd The vector after applying the activation function element-wise.
      */
-    virtual Eigen::VectorXd activate(const Eigen::VectorXd& x) = 0;
+    virtual Eigen::MatrixXd activate(const Eigen::MatrixXd& x) = 0;
 
     /**
      * @brief Virtual function to compute the derivative of the activation function.
@@ -28,10 +28,10 @@ public:
      * This method must be implemented by any derived class to compute the derivative
      * of the specific activation function.
      * 
-     * @param x Input vector for which the derivative is computed.
-     * @return Eigen::VectorXd The derivative of the activation function applied element-wise.
+     * @param x Input matrix (batch) for which the derivative is computed.
+     * @return Eigen::MatrixXd The derivative of the activation function applied element-wise.
      */
-    virtual Eigen::VectorXd derivative(const Eigen::VectorXd& x) = 0;
+    virtual Eigen::MatrixXd derivative(const Eigen::MatrixXd& x) = 0;
 };
 
 
@@ -48,20 +48,20 @@ public:
      * 
      * This method applies the Linear activation function element-wise to a vector.
      * 
-     * @param x Input vector on which the Linear activation function will be applied.
-     * @return Eigen::VectorXd The vector after applying the Linear activation function element-wise.
+     * @param x Input matrix (batch) on which the Linear activation function will be applied.
+     * @return Eigen::MatrixXd The vector after applying the Linear activation function element-wise.
      */
-    Eigen::VectorXd activate(const Eigen::VectorXd& x) override;
+    Eigen::MatrixXd activate(const Eigen::MatrixXd& x) override;
 
     /**
      * @brief Compute the derivative of the Linear activation function.
      * 
      * This method computes the derivative of the Linear activation function element-wise.
      * 
-     * @param x Input vector for which the derivative is computed.
-     * @return Eigen::VectorXd The derivative of the Linear activation function applied element-wise.
+     * @param x Input matrix (batch) for which the derivative is computed.
+     * @return Eigen::MatrixXd The derivative of the Linear activation function applied element-wise.
      */
-    Eigen::VectorXd derivative(const Eigen::VectorXd& x) override;
+    Eigen::MatrixXd derivative(const Eigen::MatrixXd& x) override;
 };
 
 
@@ -78,20 +78,20 @@ public:
      * 
      * This method applies the ReLU activation function element-wise to a vector.
      * 
-     * @param x Input vector on which the ReLU activation function will be applied.
-     * @return Eigen::VectorXd The vector after applying the ReLU activation function element-wise.
+     * @param x Input matrix (batch) on which the ReLU activation function will be applied.
+     * @return Eigen::MatrixXd The vector after applying the ReLU activation function element-wise.
      */
-    Eigen::VectorXd activate(const Eigen::VectorXd& x) override;
+    Eigen::MatrixXd activate(const Eigen::MatrixXd& x) override;
 
     /**
      * @brief Compute the derivative of the ReLU activation function.
      * 
      * This method computes the derivative of the ReLU activation function element-wise.
      * 
-     * @param x Input vector for which the derivative is computed.
-     * @return Eigen::VectorXd The derivative of the ReLU activation function applied element-wise.
+     * @param x Input matrix (batch) for which the derivative is computed.
+     * @return Eigen::MatrixXd The derivative of the ReLU activation function applied element-wise.
      */
-    Eigen::VectorXd derivative(const Eigen::VectorXd& x) override;
+    Eigen::MatrixXd derivative(const Eigen::MatrixXd& x) override;
 };
 
 
@@ -108,20 +108,20 @@ public:
      * 
      * This method applies the Sigmoid activation function element-wise to a vector.
      * 
-     * @param x Input vector on which the Sigmoid activation function will be applied.
-     * @return Eigen::VectorXd The vector after applying the Sigmoid activation function element-wise.
+     * @param x Input matrix (batch) on which the Sigmoid activation function will be applied.
+     * @return Eigen::MatrixXd The vector after applying the Sigmoid activation function element-wise.
      */
-    Eigen::VectorXd activate(const Eigen::VectorXd& x) override;
+    Eigen::MatrixXd activate(const Eigen::MatrixXd& x) override;
 
     /**
      * @brief Compute the derivative of the Sigmoid activation function.
      * 
      * This method computes the derivative of the Sigmoid activation function element-wise.
      * 
-     * @param x Input vector for which the derivative is computed.
-     * @return Eigen::VectorXd The derivative of the Sigmoid activation function applied element-wise.
+     * @param x Input matrix (batch) for which the derivative is computed.
+     * @return Eigen::MatrixXd The derivative of the Sigmoid activation function applied element-wise.
      */
-    Eigen::VectorXd derivative(const Eigen::VectorXd& x) override;
+    Eigen::MatrixXd derivative(const Eigen::MatrixXd& x) override;
 };
 
 
@@ -138,20 +138,20 @@ public:
      * 
      * This method applies the Tanh activation function element-wise to a vector.
      * 
-     * @param x Input vector on which the Tanh activation function will be applied.
-     * @return Eigen::VectorXd The vector after applying the Tanh activation function element-wise.
+     * @param x Input matrix (batch) on which the Tanh activation function will be applied.
+     * @return Eigen::MatrixXd The vector after applying the Tanh activation function element-wise.
      */
-    Eigen::VectorXd activate(const Eigen::VectorXd& x) override;
+    Eigen::MatrixXd activate(const Eigen::MatrixXd& x) override;
 
     /**
      * @brief Compute the derivative of the Tanh activation function.
      * 
      * This method computes the derivative of the Tanh activation function element-wise.
      * 
-     * @param x Input vector for which the derivative is computed.
-     * @return Eigen::VectorXd The derivative of the Tanh activation function applied element-wise.
+     * @param x Input matrix (batch) for which the derivative is computed.
+     * @return Eigen::MatrixXd The derivative of the Tanh activation function applied element-wise.
      */
-    Eigen::VectorXd derivative(const Eigen::VectorXd& x) override;
+    Eigen::MatrixXd derivative(const Eigen::MatrixXd& x) override;
 };
 
 #endif // ACTIVATION_FUNCTION_HPP
