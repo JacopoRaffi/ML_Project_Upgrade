@@ -75,8 +75,11 @@ public:
      * @param output_size Size of the output of the layer.
      * @param min_val Minimum value for the random initialization of the weights.
      * @param max_val Maximum value for the random initialization of the weights.
+     * @param bias_max_val Maximum value for the random initialization of the bias.
+     * @param bias_min_val Minimum value for the random initialization of the bias.
      */
-    FCLayer(int input_size, int output_size, float min_val = -0.5, float max_val = 0.5);
+    FCLayer(int input_size, int output_size, std::unique_ptr<ActivationFunction> func, 
+            float min_val = -0.5, float max_val = 0.5, float bias_max_val = 0.1, float bias_min_val = -0.1);
 
     Eigen::MatrixXd forward(const Eigen::MatrixXd& x) override;
 
