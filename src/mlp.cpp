@@ -63,4 +63,6 @@ std::vector<std::pair<double, double>> MLP::fit(Eigen::MatrixXd x, Eigen::Matrix
 
         loss_history.insert(loss_history.begin(), std::make_pair(tmp_train_loss / num_minibatches, evaluate(x_test, y_test, loss_function)));
     }
+
+    return loss_history;
 }
