@@ -16,6 +16,18 @@ class MLP{
 private:
     std::vector<FCLayer> layers;
 
+    /**
+     * @brief Backward pass
+     * 
+     * @param loss_grad Gradient of the loss function
+     */
+    void backward(Eigen::MatrixXd loss_grad);
+
+    /**
+     * @brief Update weights
+     */
+    void update();
+
 public:
     /**
      * @brief Construct a new MLP object
@@ -23,7 +35,7 @@ public:
      * @param input_size Input size
      * @param layers List of pairs of (number of neurons, activation function) for each layer. Last layer will be the output layer
      */
-    MLP(int input_size, std::vector<std::pair<int, std::string>> layers);
+    MLP(int input_size, std::vector<std::pair<int, ActivationFunction*>> layers);
 
     /**
      * @brief Re-Initialize weights and biases given the ranges. the i-th ranges is used for layer i
@@ -40,18 +52,6 @@ public:
      * @return Eigen::MatrixXd Output data
      */
     Eigen::MatrixXd predict(Eigen::MatrixXd x);
-
-    /**
-     * @brief Backward pass
-     * 
-     * @param loss_grad Gradient of the loss function
-     */
-    void backward(Eigen::MatrixXd loss_grad);
-
-    /**
-     * @brief Update weights
-     */
-    void update();
 
     /**
      * @brief Fit the model

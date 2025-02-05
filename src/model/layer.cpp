@@ -8,8 +8,15 @@ FCLayer::FCLayer(int input_size, int output_size, std::unique_ptr<ActivationFunc
             float min_val, float max_val, float bias_max_val, float bias_min_val){
     
     activation = std::move(func);
+    this->input_size = input_size;
+    this->output_size = output_size;
 
     // Uniform random initialization in the range [min_val, max_val] both for weights and bias
+    weights = min_val + (Eigen::MatrixXd::Random(output_size, input_size).array() + 1.0) * (max_val - min_val) / 2.0;
+    bias =  bias_min_val + (Eigen::MatrixXd::Random(output_size, 1).array() + 1.0) * (bias_max_val - bias_min_val) / 2.0; 
+};
+
+void FCLayer::init_weights(float min_val, float max_val, float bias_max_val, float bias_min_val){
     weights = min_val + (Eigen::MatrixXd::Random(output_size, input_size).array() + 1.0) * (max_val - min_val) / 2.0;
     bias =  bias_min_val + (Eigen::MatrixXd::Random(output_size, 1).array() + 1.0) * (bias_max_val - bias_min_val) / 2.0; 
 };

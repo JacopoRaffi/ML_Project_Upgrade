@@ -53,6 +53,8 @@ public:
  */
 class FCLayer : public Layer {
 private:
+    int input_size;
+    int output_size;
     std::unique_ptr<ActivationFunction> activation;
     Eigen::MatrixXd weights;
     Eigen::MatrixXd bias;
@@ -81,11 +83,18 @@ public:
     FCLayer(int input_size, int output_size, std::unique_ptr<ActivationFunction> func, 
             float min_val = -0.5, float max_val = 0.5, float bias_max_val = 0.1, float bias_min_val = -0.1);
 
+    void init_weights(float min_val, float max_val, float bias_max_val, float bias_min_val);
+
     Eigen::MatrixXd forward(const Eigen::MatrixXd& x) override;
 
     Eigen::MatrixXd backward(const Eigen::MatrixXd& grad) override;
 
     void update(double learning_rate, double weight_decay, double momentum) override;
+
+    const int get_input_size() {return input_size;};
+    const int get_output_size() {return output_size;};
+
+    ~FCLayer() = default;
 };
 
 #endif // LAYER_HPP
