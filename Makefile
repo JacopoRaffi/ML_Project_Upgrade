@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -O3
+CXXFLAGS = -O3 -std=c++23
 
 SRC_DIR = src
 INCLUDES_DIR = includes
