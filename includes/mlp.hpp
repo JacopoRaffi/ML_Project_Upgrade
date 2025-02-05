@@ -65,7 +65,19 @@ public:
      * @param weight_decay Weight decay
      * @param momentum Momentum
      */
-    void fit(Eigen::MatrixXd x, Eigen::MatrixXd y, int epochs, int num_minibatches, double learning_rate, double weight_decay, double momentum, LossFunction* loss_function);
+    std::vector<std::pair<double, double>> fit(Eigen::MatrixXd x_train, Eigen::MatrixXd y_train, Eigen::MatrixXd x_test, Eigen::MatrixXd y_test, 
+            int epochs, int num_minibatches, double learning_rate, double weight_decay, double momentum, LossFunction* loss_function);
+
+
+    /**
+     * @brief Evaluate the model
+     * 
+     * @param x Input data
+     * @param y Target data
+     * @param loss_function Loss function
+     * @return double Loss value
+     */
+    double evaluate(Eigen::MatrixXd x, Eigen::MatrixXd y, LossFunction* loss_function);
 
      ~MLP();
 };
