@@ -3,7 +3,7 @@
 
 #include <eigen3/Eigen/Dense>
 #include <memory>
-#include "../activation/activation_function.hpp"
+#include "../includes/activation_function.hpp"
 
 /**
  * @brief Abstract base class for neural network layers.

@@ -1,6 +1,6 @@
-#include "mlp.hpp"
-#include "layer.hpp"
-#include "../activation/activation_function.hpp"
+#include "../includes/mlp.hpp"
+#include "../includes/layer.hpp"
+#include "../includes/activation_function.hpp"
 
 
 MLP::MLP(int input_size, std::vector<std::pair<int, ActivationFunction*>> layers){
@@ -40,14 +40,14 @@ void MLP::fit(Eigen::MatrixXd x, Eigen::MatrixXd y, int epochs, int num_minibatc
     for(int i = 0; i < epochs; i++){
         for(int j = 0; j < num_minibatches; j++){
             int batch_size = x.rows() / num_minibatches;
-            Eigen::MatrixXd x_train_batch = x.block(j * batch_size, 0, batch_size, x.cols());
-            Eigen::MatrixXd y_true_batch = y.block(j * batch_size, 0, batch_size, y.cols());
+            Eigen::MatrixXd x_train_batch = x.block(j * batch_size, 0, batch_size, x.cols()); //take the input minibatch 
+            Eigen::MatrixXd y_true_batch = y.block(j * batch_size, 0, batch_size, y.cols()); //take the targets minibatch
 
-            Eigen::MatrixXd y_pred = predict(x_train_batch);
-            Eigen::MatrixXd loss_grad = loss_function->backward(y_true_batch, y_pred);
+            Eigen::MatrixXd y_pred = predict(x_train_batch); //forward pass
+            Eigen::MatrixXd loss_grad = loss_function->backward(y_true_batch, y_pred); //compute loss gradient
 
-            backward(loss_grad);
-            update(learning_rate, weight_decay, momentum);
+            backward(loss_grad); //backward pass
+            update(learning_rate, weight_decay, momentum); //update weights
         }
     }
 }

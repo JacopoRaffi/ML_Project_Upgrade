@@ -1,7 +1,7 @@
-#include "layer.hpp"
+#include "../includes/layer.hpp"
 #include <memory>
-#include "../activation/activation_function.hpp"
-#include "../loss/loss_function.hpp"
+#include "../includes/activation_function.hpp"
+#include "../includes/loss_function.hpp"
 #include <iostream>
 
 FCLayer::FCLayer(int input_size, int output_size, std::unique_ptr<ActivationFunction> func, 

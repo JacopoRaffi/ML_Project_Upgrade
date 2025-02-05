@@ -1,4 +1,4 @@
-#include "activation_function.hpp"
+#include "../includes/activation_function.hpp"
 #include <iostream>
 
 // ---------------------------------------- Linear ----------------------------------------

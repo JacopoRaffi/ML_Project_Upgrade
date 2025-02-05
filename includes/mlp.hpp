@@ -6,7 +6,7 @@
 #include <string>
 #include <utility>
 #include "layer.hpp"
-#include "../loss/loss_function.hpp"
+#include "../includes/loss_function.hpp"
 
 /**
  * @brief Multi-layer perceptron class

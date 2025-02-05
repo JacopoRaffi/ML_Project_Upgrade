@@ -1,4 +1,4 @@
-#include "loss_function.hpp"
+#include "../includes/loss_function.hpp"
 #include <iostream>
 
 
