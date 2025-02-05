@@ -15,7 +15,7 @@
  */
 class MLP{
 private:
-    std::vector<FCLayer> layers;
+    std::vector<std::unique_ptr<FCLayer>> layers;
 
     /**
      * @brief Backward pass

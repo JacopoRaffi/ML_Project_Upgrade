@@ -3,22 +3,24 @@
 #include "../includes/activation_function.hpp"
 
 
-MLP::MLP(int input_size, std::vector<std::pair<int, ActivationFunction*>> layers){
-    for(int i = 0; i < layers.size(); i++){   
-        this->layers.push_back(FCLayer(input_size, layers[i].first, std::unique_ptr<ActivationFunction>(layers[i].second))); //create layers
+MLP::MLP(int input_size, std::vector<std::pair<int, ActivationFunction*>> layers) {
+    for (int i = 0; i < layers.size(); i++) {  
+        std::unique_ptr<ActivationFunction> activation_function = std::unique_ptr<ActivationFunction>(layers[i].second);
+        
+        this->layers.push_back(std::make_unique<FCLayer>(input_size, layers[i].first, std::move(activation_function)));
         input_size = layers[i].first;
     }
 }
 
 void MLP::init_weights(std::vector<std::pair<int, int>> weight_ranges, std::vector<std::pair<int, int>> bias_ranges){
     for(int i = 0; i < layers.size(); i++){
-        layers[i].init_weights(weight_ranges[i].first, weight_ranges[i].second, bias_ranges[i].first, bias_ranges[i].second); //re-init weights
+        layers[i]->init_weights(weight_ranges[i].first, weight_ranges[i].second, bias_ranges[i].first, bias_ranges[i].second); //re-init weights
     }
 }
 
 Eigen::MatrixXd MLP::predict(Eigen::MatrixXd x){
     for(int i = 0; i < layers.size(); i++){
-        x = layers[i].forward(x);
+        x = layers[i]->forward(x);
     }
 
     return x;
@@ -26,13 +28,13 @@ Eigen::MatrixXd MLP::predict(Eigen::MatrixXd x){
 
 void MLP::backward(Eigen::MatrixXd grad){
     for(int i = layers.size() - 1; i >= 0; i--){
-        grad = layers[i].backward(grad);
+        grad = layers[i]->backward(grad);
     }
 }
 
 void MLP::update(double lr, double weight_decay, double momentum){
     for(int i = 0; i < layers.size(); i++){
-        layers[i].update(lr, weight_decay, momentum);
+        layers[i]->update(lr, weight_decay, momentum);
     }
 }
 
