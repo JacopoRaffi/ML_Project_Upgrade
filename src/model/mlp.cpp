@@ -23,3 +23,31 @@ Eigen::MatrixXd MLP::predict(Eigen::MatrixXd x){
 
     return x;
 }
+
+void MLP::backward(Eigen::MatrixXd grad){
+    for(int i = layers.size() - 1; i >= 0; i--){
+        grad = layers[i].backward(grad);
+    }
+}
+
+void MLP::update(double lr, double weight_decay, double momentum){
+    for(int i = 0; i < layers.size(); i++){
+        layers[i].update(lr, weight_decay, momentum);
+    }
+}
+
+void MLP::fit(Eigen::MatrixXd x, Eigen::MatrixXd y, int epochs, int num_minibatches, double learning_rate, double weight_decay, double momentum, LossFunction* loss_function){
+    for(int i = 0; i < epochs; i++){
+        for(int j = 0; j < num_minibatches; j++){
+            int batch_size = x.rows() / num_minibatches;
+            Eigen::MatrixXd x_train_batch = x.block(j * batch_size, 0, batch_size, x.cols());
+            Eigen::MatrixXd y_true_batch = y.block(j * batch_size, 0, batch_size, y.cols());
+
+            Eigen::MatrixXd y_pred = predict(x_train_batch);
+            Eigen::MatrixXd loss_grad = loss_function->backward(y_true_batch, y_pred);
+
+            backward(loss_grad);
+            update(learning_rate, weight_decay, momentum);
+        }
+    }
+}

@@ -6,6 +6,7 @@
 #include <string>
 #include <utility>
 #include "layer.hpp"
+#include "../loss/loss_function.hpp"
 
 /**
  * @brief Multi-layer perceptron class
@@ -26,7 +27,7 @@ private:
     /**
      * @brief Update weights
      */
-    void update();
+    void update(double lr, double weight_decay, double momentum);
 
 public:
     /**
@@ -64,7 +65,7 @@ public:
      * @param weight_decay Weight decay
      * @param momentum Momentum
      */
-    void fit(Eigen::MatrixXd x, Eigen::MatrixXd y, int epochs, int num_minibatches, double learning_rate, double weight_decay, double momentum);
+    void fit(Eigen::MatrixXd x, Eigen::MatrixXd y, int epochs, int num_minibatches, double learning_rate, double weight_decay, double momentum, LossFunction* loss_function);
 
      ~MLP();
 };
