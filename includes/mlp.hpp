@@ -79,7 +79,7 @@ public:
      */
     double evaluate(Eigen::MatrixXd x, Eigen::MatrixXd y, LossFunction* loss_function);
 
-     ~MLP();
+    ~MLP() = default;
 };
 
 #endif // MLP_HPP

@@ -2,6 +2,8 @@
 #include "../includes/layer.hpp"
 #include "../includes/activation_function.hpp"
 
+#include <iostream>
+
 
 MLP::MLP(int input_size, std::vector<std::pair<int, ActivationFunction*>> layers) {
     for (int i = 0; i < layers.size(); i++) {  
