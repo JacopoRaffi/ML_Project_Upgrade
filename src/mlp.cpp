@@ -63,7 +63,7 @@ std::vector<std::pair<double, double>> MLP::fit(Eigen::MatrixXd x, Eigen::Matrix
             update(learning_rate, weight_decay, momentum); //update weights
         }
 
-        loss_history.insert(loss_history.begin(), std::make_pair(tmp_train_loss / num_minibatches, evaluate(x_test, y_test, loss_function)));
+        loss_history.push_back(std::make_pair(tmp_train_loss / num_minibatches, evaluate(x_test, y_test, loss_function)));
     }
 
     return loss_history;
