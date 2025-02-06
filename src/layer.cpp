@@ -14,6 +14,9 @@ FCLayer::FCLayer(int input_size, int output_size, std::unique_ptr<ActivationFunc
     // Uniform random initialization in the range [min_val, max_val] both for weights and bias
     weights = min_val + (Eigen::MatrixXd::Random(output_size, input_size).array() + 1.0) * (max_val - min_val) / 2.0;
     bias =  bias_min_val + (Eigen::MatrixXd::Random(output_size, 1).array() + 1.0) * (bias_max_val - bias_min_val) / 2.0; 
+
+    prev_weights_update = Eigen::MatrixXd::Zero(output_size, input_size);
+    prev_bias_update = Eigen::MatrixXd::Zero(output_size, 1);
 };
 
 void FCLayer::init_weights(float min_val, float max_val, float bias_max_val, float bias_min_val){
@@ -28,7 +31,9 @@ Eigen::MatrixXd FCLayer::forward(const Eigen::MatrixXd& x){
 };
 
 Eigen::MatrixXd FCLayer::backward(const Eigen::MatrixXd& grad){
+    Eigen::MatrixXd tmp = activation->derivative(output);
     Eigen::MatrixXd delta = grad.cwiseProduct(activation->derivative(output)); // grad * activation'(output)
+
     grad_weights = delta.transpose() * input; // delta^T * X
     grad_bias = delta.colwise().sum();
 
@@ -37,7 +42,8 @@ Eigen::MatrixXd FCLayer::backward(const Eigen::MatrixXd& grad){
 
 void FCLayer::update(double learning_rate, double weight_decay, double momentum){
     Eigen::MatrixXd weights_update = learning_rate * grad_weights + momentum * prev_weights_update; // lr*grad + momentum*prev_update
-    Eigen::MatrixXd bias_update = learning_rate * grad_bias + momentum * prev_bias_update;
+    Eigen::MatrixXd bias_update = learning_rate * grad_bias.transpose() + momentum * prev_bias_update;
+
 
     weights -= weights_update - weight_decay * weights; // w = w - lr*grad - wd*w
     bias -= bias_update; // do not apply regularization for the bias
